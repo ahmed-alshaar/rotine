@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Routines</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        peacock: {
+                            900: '#0d2d4c',
+                            800: '#16497B',
+                            700: '#1e62a3',
+                        },
+                        coconut: {
+                            50: '#f8f9fa',
+                            100: 'rgba(255, 255, 255, 0.1)',
+                            200: 'rgba(255, 255, 255, 0.2)',
+                        },
+                        sage: {
+                            500: '#84A98C',
+                        },
+                        ginger: {
+                            500: '#E07A5F',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0d2d4c 0%, #16497B 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { display: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+        }
+        .glass-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-button:active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(0.98);
+        }
+        .glass-nav {
+            background: rgba(22, 73, 123, 0.85);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .routine-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .routine-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="w-full min-h-screen antialiased flex flex-col m-0 p-0 relative">
+
+    <header id="top-bar" class="w-full px-6 pt-12 pb-4 flex justify-between items-center z-10">
+        <div class="flex items-center space-x-3">
+            <button class="w-10 h-10 rounded-full glass-button flex items-center justify-center">
+                <i class="fa-solid fa-arrow-left text-white text-lg"></i>
+            </button>
+            <div class="flex flex-col">
+                <h1 class="text-xl font-semibold text-white tracking-wide">Routines</h1>
+                <span class="text-xs text-coconut-200 font-medium">4 Active</span>
+            </div>
+        </div>
+        <button class="w-10 h-10 rounded-full glass-button flex items-center justify-center">
+            <i class="fa-solid fa-plus text-white text-lg"></i>
+        </button>
+    </header>
+
+    <main id="main-content" class="flex-1 w-full max-w-md mx-auto px-6 pb-28 flex flex-col space-y-5 z-10 relative">
+        
+        <section id="quick-actions" class="flex space-x-3 overflow-x-auto pb-2">
+            <button class="flex-shrink-0 px-5 py-2.5 rounded-full bg-white text-peacock-900 font-medium text-sm shadow-lg">
+                <i class="fa-solid fa-check mr-2 text-xs"></i>All
+            </button>
+            <button class="flex-shrink-0 px-5 py-2.5 rounded-full glass-button text-white font-medium text-sm">
+                <i class="fa-solid fa-clock mr-2 text-xs"></i>Scheduled
+            </button>
+            <button class="flex-shrink-0 px-5 py-2.5 rounded-full glass-button text-white font-medium text-sm">
+                <i class="fa-solid fa-wand-magic-sparkles mr-2 text-xs"></i>Smart
+            </button>
+        </section>
+
+        <section id="active-routines" class="space-y-4">
+            <h2 class="text-xs uppercase tracking-wider text-coconut-200 font-semibold px-1">Active Routines</h2>
+            
+            <div id="routine-morning" class="routine-card p-5 cursor-pointer">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-sun text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-semibold text-white">Morning Fresh</h3>
+                            <p class="text-xs text-coconut-200">Weekdays • 7:00 AM</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-coconut-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sage-500"></div>
+                    </label>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-bolt text-[10px]"></i>
+                        <span>Boost Mode</span>
+                    </span>
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-fan text-[10px]"></i>
+                        <span>Speed 3</span>
+                    </span>
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-clock text-[10px]"></i>
+                        <span>30 min</span>
+                    </span>
+                </div>
+                <div class="mt-4 pt-4 border-t border-coconut-100 flex items-center justify-between">
+                    <span class="text-xs text-coconut-200">Next run: Tomorrow 7:00 AM</span>
+                    <i class="fa-solid fa-chevron-right text-xs text-coconut-200"></i>
+                </div>
+            </div>
+
+            <div id="routine-sleep" class="routine-card p-5 cursor-pointer">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-moon text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-semibold text-white">Sleep Mode</h3>
+                            <p class="text-xs text-coconut-200">Every day • 10:00 PM</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-coconut-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sage-500"></div>
+                    </label>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-volume-xmark text-[10px]"></i>
+                        <span>Silent</span>
+                    </span>
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-fan text-[10px]"></i>
+                        <span>Speed 1</span>
+                    </span>
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-lightbulb text-[10px]"></i>
+                        <span>Dim lights</span>
+                    </span>
+                </div>
+                <div class="mt-4 pt-4 border-t border-coconut-100 flex items-center justify-between">
+                    <span class="text-xs text-coconut-200">Next run: Today 10:00 PM</span>
+                    <i class="fa-solid fa-chevron-right text-xs text-coconut-200"></i>
+                </div>
+            </div>
+
+            <div id="routine-workout" class="routine-card p-5 cursor-pointer">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-dumbbell text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-semibold text-white">Workout Time</h3>
+                            <p class="text-xs text-coconut-200">Mon, Wed, Fri • 6:00 PM</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-coconut-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sage-500"></div>
+                    </label>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                        <span>Auto Mode</span>
+                    </span>
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-clock text-[10px]"></i>
+                        <span>45 min</span>
+                    </span>
+                </div>
+                <div class="mt-4 pt-4 border-t border-coconut-100 flex items-center justify-between">
+                    <span class="text-xs text-coconut-200">Next run: Wednesday 6:00 PM</span>
+                    <i class="fa-solid fa-chevron-right text-xs text-coconut-200"></i>
+                </div>
+            </div>
+
+            <div id="routine-away" class="routine-card p-5 cursor-pointer">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-house-lock text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-semibold text-white">Away Mode</h3>
+                            <p class="text-xs text-coconut-200">Manual trigger</p>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer">
+                        <div class="w-11 h-6 bg-coconut-100 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-sage-500"></div>
+                    </label>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-power-off text-[10px]"></i>
+                        <span>Turn Off</span>
+                    </span>
+                    <span class="px-3 py-1.5 rounded-full bg-coconut-100 text-xs text-white font-medium flex items-center space-x-1.5">
+                        <i class="fa-solid fa-bell text-[10px]"></i>
+                        <span>Notify</span>
+                    </span>
+                </div>
+                <div class="mt-4 pt-4 border-t border-coconut-100 flex items-center justify-between">
+                    <span class="text-xs text-coconut-200">Tap to activate</span>
+                    <i class="fa-solid fa-chevron-right text-xs text-coconut-200"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="smart-suggestions" class="space-y-4 mt-6">
+            <h2 class="text-xs uppercase tracking-wider text-coconut-200 font-semibold px-1">Smart Suggestions</h2>
+            
+            <div id="suggestion-allergen" class="glass-card p-5 cursor-pointer">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sage-500 to-emerald-600 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-sparkles text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-sm font-semibold text-white mb-1">Allergen Alert Routine</h3>
+                        <p class="text-xs text-coconut-200 mb-3">Auto-boost when pollen count is high in your area</p>
+                        <button class="px-4 py-2 rounded-lg bg-white text-peacock-900 font-medium text-xs">
+                            Create Routine
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="suggestion-energy" class="glass-card p-5 cursor-pointer">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-ginger-500 to-yellow-600 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-leaf text-white text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-sm font-semibold text-white mb-1">Energy Saver</h3>
+                        <p class="text-xs text-coconut-200 mb-3">Reduce speed during off-peak hours to save energy</p>
+                        <button class="px-4 py-2 rounded-lg bg-white text-peacock-900 font-medium text-xs">
+                            Create Routine
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="routine-stats" class="glass-card p-5 mt-4">
+            <h3 class="text-sm font-semibold text-white mb-4">This Week</h3>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-white mb-1">28</div>
+                    <div class="text-xs text-coconut-200">Runs</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-sage-500 mb-1">14h</div>
+                    <div class="text-xs text-coconut-200">Active Time</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-ginger-500 mb-1">2.1</div>
+                    <div class="text-xs text-coconut-200">kWh Saved</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 glass-nav pb-8 pt-4 px-6 z-50">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <a href="#" class="flex flex-col items-center space-y-1 text-coconut-200 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-house text-lg"></i>
+                </div>
+                <span class="text-[10px] font-medium">Home</span>
+            </a>
+            <a href="#" class="flex flex-col items-center space-y-1 text-coconut-200 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-chart-line text-lg"></i>
+                </div>
+                <span class="text-[10px] font-medium">Stats</span>
+            </a>
+            <a href="#" class="flex flex-col items-center space-y-1 text-coconut-200 hover:text-white transition-colors group relative">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-peacock-700 to-peacock-900 border-2 border-peacock-800 flex items-center justify-center shadow-xl absolute -top-8 left-1/2 transform -translate-x-1/2">
+                    <i class="fa-solid fa-plus text-xl text-white"></i>
+                </div>
+                <div class="h-10"></div>
+                <span class="text-[10px] font-medium opacity-0">Add</span>
+            </a>
+            <a href="#" class="flex flex-col items-center space-y-1 text-white group">
+                <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                    <i class="fa-regular fa-calendar text-lg"></i>
+                </div>
+                <span class="text-[10px] font-medium">Routines</span>
+            </a>
+            <a href="#" class="flex flex-col items-center space-y-1 text-coconut-200 hover:text-white transition-colors group">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                    <i class="fa-solid fa-gear text-lg"></i>
+                </div>
+                <span class="text-[10px] font-medium">Settings</span>
+            </a>
+        </div>
+    </nav>
+
+</body>
+</html>
